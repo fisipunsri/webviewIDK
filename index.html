@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Data Kepegawaian</title>
+    <meta name="theme-color" content="#20222A">
+    <!-- Opsional: ganti dengan logo Anda (file di repo ini, mis. favicon.png) -->
+    <!-- <link rel="icon" href="favicon.png"> -->
+    <style>
+        html, body { margin: 0; height: 100%; background: #20222A; overflow: hidden; }
+        #wrap { position: fixed; inset: 0; overflow: hidden; background: #F7F8FA; }
+        #frame { position: absolute; left: 0; width: 100%; border: 0; display: block; background: #F7F8FA; }
+        #loader { position: fixed; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; background: #20222A; color: #cbd0d8; font: 600 12px/1 system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; transition: opacity .3s; z-index: 2; }
+        #loader.hide { opacity: 0; pointer-events: none; }
+        .spin { width: 38px; height: 38px; border: 3px solid rgba(255,255,255,.18); border-top-color: #A98AA5; border-radius: 50%; animation: s 0.9s linear infinite; }
+        @keyframes s { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div id="wrap"><iframe id="frame" title="Data Kepegawaian" allow="fullscreen" referrerpolicy="no-referrer"></iframe></div>
+    <div id="loader"><div class="spin"></div>Memuat...</div>
+    <noscript>Aktifkan JavaScript untuk membuka aplikasi ini.</noscript>
+
+    <script>
+        // 1) WAJIB: tempel URL Web App Apps Script (yang berakhiran /exec)
+        var APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfG7IW5VvHQKGkngo3UScfX7ojTHTA0btWlEyqCcUFJ7qqzEUD8_gb5L8JqyXoYmc2/exec';
+
+        // 2) Opsional: tinggi (px) bagian atas yang dipotong. 0 = tidak dipotong.
+        //    Isi sekitar 40 bila ingin bilah pemberitahuan Google di atas tidak terlihat.
+        var POTONG_ATAS_PX = 0;
+
+        var f = document.getElementById('frame');
+        f.style.top = (-POTONG_ATAS_PX) + 'px';
+        f.style.height = 'calc(100% + ' + POTONG_ATAS_PX + 'px)';
+        f.addEventListener('load', function () { document.getElementById('loader').classList.add('hide'); });
+        f.src = APPS_SCRIPT_URL;
+        setTimeout(function () { document.getElementById('loader').classList.add('hide'); }, 8000);
+    </script>
+</body>
+</html>
